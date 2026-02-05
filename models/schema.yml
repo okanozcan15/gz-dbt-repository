@@ -8,6 +8,13 @@ sources:
       - name: sales
         identifier: raw_gz_sales
         description: sales of Greenweez / we have one row per product_id found in each orders_id
+      
+        config:
+          loaded_at_field: "CAST(date_date AS TIMESTAMP)" 
+          freshness: 
+            warn_after: {count: 90, period: day}
+            
+        
         columns:
           - name: date_date
             description: date of purchase
@@ -25,6 +32,10 @@ sources:
         columns:
           - name: products_id
             description: Primary key
+            tests:
+              - unique
+              - not_null
+              
           - name: purchase_price
             description: the purchase price of the product
 
@@ -33,6 +44,9 @@ sources:
         columns:
           - name: orders_id
             description: Primary key
+            tests:
+              - unique
+              - not_null
           - name: shipping_fee
             description: the price the customer pays for shipping
           - name:  log_cost
