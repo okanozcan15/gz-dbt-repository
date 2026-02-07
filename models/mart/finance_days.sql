@@ -10,4 +10,4 @@ SELECT
     ROUND (SUM(quantity),0) AS quantity,
     (max(revenue)/NULLIF(count(DISTINCT orders_id),0)) as avegare_basket
 from {{ref("int_orders_operational")}}
-GROUP BY date_date;
+GROUP BY date_date
